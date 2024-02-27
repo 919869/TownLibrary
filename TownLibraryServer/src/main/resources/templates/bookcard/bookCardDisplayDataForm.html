@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Городская библиотека</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" th:href="@{/styles.css}">
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+  <div th:insert="fragments :: header">Header</div>
+
+  <div class="container">
+    <div class="mb-3">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" th:href="@{s1}">Основные данные</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{s2}">Информация о выдаче</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card" th:object="${currentBookCard}">
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="article">Артикул</label>
+          <input type="text" class="form-control" id="article" th:field="*{article}" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="name">Наименование</label>
+          <input type="text" class="form-control" id="name" th:field="*{name}" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="author">Автор</label>
+          <input type="text" class="form-control" id="author" th:field="*{author}" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="publisher">Издательство</label>
+          <input type="text" class="form-control" id="publisher" th:field="*{publisher}" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="lbc">ББК</label>
+          <input type="text" class="form-control" id="lbc" th:field="*{lbc}" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="numberOpened">Кол-во просмотров</label>
+          <input type="text" class="form-control" id="numberOpened" th:field="*{numberOpened}" readonly>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:insert="fragments :: footer">Footer</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+server:
+  port: ${LIB_CLIENT_PORT}
+
+name:
+  server:
+    url: "http://${LIB_SERVER_HOST}:${LIB_SERVER_PORT}/api"
+
+spring:
+  kafka:
+    bootstrap-servers:
+    - library-kafka-server:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

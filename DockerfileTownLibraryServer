@@ -1,0 +1,12 @@
+FROM maven:3.6.3-openjdk-17 as builder
+WORKDIR /app
+COPY pom.xml /app/pom.xml
+COPY TownLibraryServer/pom.xml /app/TownLibraryServer/pom.xml
+COPY TownLibraryServer/src /app/TownLibraryServer/src
+RUN mvn -f /app/TownLibraryServer/pom.xml clean package -Dmaven.test.skip=true
+
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/TownLibraryServer/target/TownLibraryAppServer.jar /app/TownLibraryAppServer.jar
+EXPOSE 9098
+ENTRYPOINT ["java", "-jar", "/app/TownLibraryAppServer.jar"]

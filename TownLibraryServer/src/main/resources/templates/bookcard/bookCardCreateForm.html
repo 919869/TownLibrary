@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Городская библиотека</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+  </head>
+  <body>
+    <div th:insert="fragments :: header">Header</div>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Создание карточки книги</h5>
+          <form th:object="${newBookCard}" th:action="@{/bookCards/new}" method="POST">
+            <div class="mb-3">
+              <label for="article">Артикул</label>
+              <input type="text" class="form-control" id="article" th:field="*{article}" placeholder="Номер артикула">
+              <p th:each="error : ${#fields.errors('article')}" th:text="${error}" class="text-danger">Article</p>
+            </div>
+
+            <div class="mb-3">
+              <label for="name">Наименование</label>
+              <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Наименование книги">
+              <p th:each="error : ${#fields.errors('name')}" th:text="${error}" class="text-danger">Name</p>
+            </div>
+
+            <div class="mb-3">
+              <label for="author">Автор</label>
+              <input type="text" class="form-control" id="author" th:field="*{author}" placeholder="Автор">
+              <p th:each="error : ${#fields.errors('author')}" th:text="${error}" class="text-danger">Author</p>
+            </div>
+
+            <div class="mb-3">
+              <label for="publisher">Издательство</label>
+              <input type="text" class="form-control" id="publisher" th:field="*{publisher}" placeholder="Издательство">
+              <p th:each="error : ${#fields.errors('publisher')}" th:text="${error}" class="text-danger">Publisher</p>
+            </div>
+
+            <div class="mb-3">
+              <label for="lbc">ББК</label>
+              <input type="text" class="form-control" id="lbc" th:field="*{lbc}" placeholder="ББК">
+              <p th:each="error : ${#fields.errors('lbc')}" th:text="${error}" class="text-danger">LBC</p>
+            </div>
+
+            <div class="mb-3 border-1">
+              <button class="btn btn-primary" type="submit" name="saveNewBookCard">Сохранить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div th:insert="fragments :: footer">Footer</div>
+  </body>
+</html>

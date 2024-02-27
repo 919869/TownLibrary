@@ -1,0 +1,1 @@
+ALTER TABLE issue_card ADD identify_number varchar(255) not null

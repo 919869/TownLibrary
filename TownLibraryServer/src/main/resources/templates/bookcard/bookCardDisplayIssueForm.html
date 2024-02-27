@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Городская библиотека</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" th:href="@{/styles.css}">
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+<div th:insert="fragments :: header">Header</div>
+
+<div class="container">
+  <form th:object="${currentBookCard}">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{s1}">Основные данные</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" th:href="@{s2}">Информация о выдаче</a>
+      </li>
+    </ul>
+  </form>
+
+  <div>
+    Информация о выдаче
+  </div>
+</div>
+
+<div th:insert="fragments :: footer">Footer</div>
+</body>
+</html>

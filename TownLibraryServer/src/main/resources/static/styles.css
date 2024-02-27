@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+.menu-header {
+  list-style: none;
+  margin: 40px 0 5px;
+  padding: 25px 0 5px;
+  text-align: center;
+  background: white;
+}
+.menu-header li {display: inline-block;}
+.menu-header li:after {
+  content: "|";
+  color: #606060;
+  display: inline-block;
+  vertical-align:top;
+}
+.menu-header li:last-child:after {content: none;}
+.menu-header a {
+  text-decoration: none;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 20px;
+  margin: 0 34px 0 30px;
+  font-size: 17px;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: color .2s;
+}
+.menu-header a, .menu-header a:visited {color: #9d999d;}
+.menu-header a.current, .menu-header a:hover{color: #feb386;}
+.menu-header a:before,
+.menu-header a:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  top: auto;
+  right: 50%;
+  bottom: -5px;
+  left: 50%;
+  background: #feb386;
+  transition: .8s;
+}
+.menu-header a:hover:before, .menu-header .current:before {left: 0;}
+.menu-header a:hover:after, .menu-header .current:after {right: 0;}
+@media (max-width: 550px) {
+.menu-header {padding-top: 0;}
+.menu-header li {display: block;}
+.menu-header li:after {content: none;}
+.menu-header a {
+  padding: 25px 0 20px;
+  margin: 0 30px;
+}
+}
+.footer {
+  margin: 40px 0 5px;
+  padding: 25px 0 5px;
+  text-align: center;
+  background: white;
+  text-decoration: none;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  letter-spacing: 2px;
+  transition: color .2s;
+}
+
+.books th {
+  background: #C9E3FE;
+}
+
+.books-toolbar form {
+  display: inline-block;
+}
+
+.bookCard {
+  display: flex;
+}

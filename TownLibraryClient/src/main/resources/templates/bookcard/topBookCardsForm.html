@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Городская библиотека</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+  </head>
+  <body>
+    <div th:insert="fragments :: header">Header</div>
+    <div th:insert="fragments :: reader">Reader</div>
+
+    <div class="container">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+          <th>Артикул</th>
+          <th>Наименование</th>
+          <th>Автор</th>
+          <th>Издательство</th>
+          <th>ББК</th>
+          <th>Кол-во выдач</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bookCardSummary : ${bookCardsSummary}">
+          <td th:text="${bookCardSummary.article}">Article</a></td>
+          <td th:text="${bookCardSummary.name}">Name</td>
+          <td th:text="${bookCardSummary.author}">Author</td>
+          <td th:text="${bookCardSummary.publisher}">Publisher</td>
+          <td th:text="${bookCardSummary.lbc}">Lbc</td>
+          <td th:text="${bookCardSummary.numberOfBookIssues}">NumberOfBookIssues</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div th:insert="fragments :: footer">Footer</div>
+  </body>
+</html>

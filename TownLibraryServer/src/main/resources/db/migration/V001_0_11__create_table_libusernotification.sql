@@ -1,0 +1,1 @@
+create table lib_user_notification (create_date timestamp(6), message varchar(255), user_id bigint, record_id varchar(255) not null, primary key (record_id))

@@ -1,0 +1,1 @@
+create table lib_user_name (from_date timestamp(6), to_date timestamp(6), user_id bigint, first_name varchar(255), last_name varchar(255), record_id varchar(255) not null, primary key (record_id))

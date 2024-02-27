@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Fragments</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div th:fragment="header">
+      <ul class="menu-header">
+        <li><a th:href="@{/bookCards}">Каталог</a></li>
+        <li><a th:href="@{/readers}">Читатели</a></li>
+        <li><a th:href="@{/logout}">Выход</a></li>
+      </ul>
+    </div>
+
+    <div th:fragment="footer" th:class="footer">
+      Разработано в рамках учебного курса
+    </div>
+  </body>
+</html>

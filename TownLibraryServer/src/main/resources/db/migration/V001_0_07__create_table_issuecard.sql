@@ -1,0 +1,1 @@
+create table issue_card (actual_end_date timestamp(6), libraria_id bigint, planned_end_date timestamp(6), reader_id bigint, start_date timestamp(6), record_id varchar(255) not null, primary key (record_id))

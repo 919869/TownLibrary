@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Городская библиотека</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" th:href="@{/styles.css}">
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+<div th:insert="fragments :: header">Header</div>
+<div th:insert="fragments :: reader">Reader</div>
+
+<div class="container">
+  <div class="row mb-3" th:object="${issueBooks}">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+      <tr>
+        <th>Инвентарный номер</th>
+        <th>Наименование книги</th>
+        <th>Дата выдачи</th>
+        <th>Плановая дата возврата</th>
+        <th>Фактическая дата возврата</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${issueBooks}">
+        <td th:text="${item.identifyNumber}">identifyNumber</td>
+        <td th:text="${item.bookCardName}">bookCardName</td>
+        <td th:text="${#dates.format(item.startDate, 'dd-MM-yyyy HH:mm')}">startDate</a></td>
+        <td th:text="${#dates.format(item.plannedEndDate, 'dd-MM-yyyy HH:mm')}">plannedEndDate</a></td>
+        <td th:text="${#dates.format(item.actualEndDate, 'dd-MM-yyyy HH:mm')}">actualEndDate</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div th:insert="fragments :: footer">Footer</div>
+</body>
+</html>

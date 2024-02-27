@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Городская библиотека</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+  </head>
+  <body>
+    <div th:insert="fragments :: header">Header</div>
+    <div th:insert="fragments :: reader">Reader</div>
+
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-lg-3">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск" name="keyword" th:value="${keyword}">
+            <button class="btn btn-outline-success" type="submit">Поиск</button>
+          </form>
+        </div>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+          <th>Артикул</th>
+          <th>Наименование</th>
+          <th>Автор</th>
+          <th>Издательство</th>
+          <th>ББК</th>
+          <th>Доступное количество</th>
+          <th>Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr th:each="bookCard : ${bookCards}">
+            <td th:text="${bookCard.article}">Article</a></td>
+            <td th:text="${bookCard.name}">Name</td>
+            <td th:text="${bookCard.author}">Author</td>
+            <td th:text="${bookCard.publisher}">Publisher</td>
+            <td th:text="${bookCard.lbc}">Lbc</td>
+            <th th:text="${bookCard.numberOfFreeBooks}">NumberOfFreeBooks</th>
+            <th>
+              <a th:href="@{/bookCards/{article}(article=${bookCard.article})}" class="btn btn-warning">Просмотр</a>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div th:insert="fragments :: footer">Footer</div>
+  </body>
+</html>

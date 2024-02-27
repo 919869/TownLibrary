@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Городская библиотека</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+  </head>
+  <body>
+    <div th:insert="fragments :: header">Header</div>
+    <div th:insert="fragments :: reader">Reader</div>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <form th:object="${currentBookCard}" method="POST">
+            <div class="mb-3">
+              <label for="article">Артикул</label>
+              <input type="text" class="form-control" id="article" th:field="*{article}" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="name">Наименование</label>
+              <input type="text" class="form-control" id="name" th:field="*{name}" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="author">Автор</label>
+              <input type="text" class="form-control" id="author" th:field="*{author}" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="publisher">Издательство</label>
+              <input type="text" class="form-control" id="publisher" th:field="*{publisher}" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="lbc">ББК</label>
+              <input type="text" class="form-control" id="lbc" th:field="*{lbc}" readonly>
+            </div>
+
+            <div class="mb-3 d-grid gap-2 d-md-block">
+              <button class="btn btn-success btn-sm" type="submit" name="subscribeBookCard">Подписаться</button>
+              <button class="btn btn-danger btn-sm" type="submit" name="unSubscribeBookCard">Отписаться</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div th:insert="fragments :: footer">Footer</div>
+  </body>
+</html>

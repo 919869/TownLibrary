@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Fragments</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div th:fragment="header">
+      <ul class="menu-header">
+        <li><a th:href="@{/bookCards}">Каталог</a></li>
+        <li><a th:href="@{/topBookCards}">ТОП-10</a></li>
+        <li><a th:href="@{/issueBooks}">Мои книги</a></li>
+        <li><a th:href="@{/notifications}">Уведомления</a></li>
+        <li><a href="/logout">Выход</a></li>
+      </ul>
+    </div>
+
+    <div th:fragment="reader" class="mb-3 container">
+      <div class="card" th:object="${currentReader}">
+        <div class="card-body">
+          <h4><span th:text="*{id}"></span>: <span th:text="*{lastName}"></span> <span th:text="*{firstName}"></span></h4>
+        </div>
+      </div>
+    </div>
+
+    <div th:fragment="footer" th:class="footer">
+      Разработано в рамках учебного курса
+    </div>
+  </body>
+</html>

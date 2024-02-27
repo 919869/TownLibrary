@@ -1,0 +1,1 @@
+create table lib_user (id bigint not null, password varchar(255), primary key (id))

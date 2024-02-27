@@ -1,0 +1,1 @@
+create table subscribe_card (is_active boolean not null, reader_id bigint, article varchar(255), record_id varchar(255) not null, primary key (record_id))

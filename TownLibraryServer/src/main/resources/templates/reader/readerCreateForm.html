@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Городская библиотека</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" th:href="@{/styles.css}">
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+<div th:insert="fragments :: header">Header</div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Создание карточки читателя</h5>
+      <form th:object="${newReader}" th:action="@{/readers/new}" method="POST">
+        <div class="mb-3">
+          <label for="id">Идентификатор</label>
+          <input type="text" class="form-control" id="id" th:field="*{id}" placeholder="Идентификатор">
+          <p th:each="error : ${#fields.errors('id')}" th:text="${error}" class="text-danger">Id</p>
+        </div>
+
+        <div class="mb-3">
+          <label for="lastName">Фамилия</label>
+          <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Фамилия">
+          <p th:each="error : ${#fields.errors('lastName')}" th:text="${error}" class="text-danger">LastName</p>
+        </div>
+
+        <div class="mb-3">
+          <label for="firstName">Имя</label>
+          <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="Имя">
+          <p th:each="error : ${#fields.errors('lastName')}" th:text="${error}" class="text-danger">Name</p>
+        </div>
+
+        <div class="mb-3">
+          <label for="password">Пароль</label>
+          <input type="text" class="form-control" id="password" th:field="*{password}" placeholder="Пароль">
+          <p th:each="error : ${#fields.errors('password')}" th:text="${error}" class="text-danger">Password</p>
+        </div>
+
+        <div class="mb-3 border-1">
+          <button class="btn btn-primary" type="submit" name="saveNewBookCard">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div th:insert="fragments :: footer">Footer</div>
+</body>
+</html>

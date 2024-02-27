@@ -1,0 +1,1 @@
+create table book (article varchar(255), identify_number varchar(255) not null, primary key (identify_number))

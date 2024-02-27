@@ -1,0 +1,94 @@
+version: "2.24.1"
+services:
+  libserver:
+    image: libraryserver:v01
+    container_name: library-server
+    build:
+      context: .
+      dockerfile: DockerfileTownLibraryServer
+    restart: unless-stopped
+    environment:
+      - LIB_DB_HOST=library-database
+      - LIB_SERVER_PORT=9098
+      - LIB_KAFKA_SERVER=library-kafka-server
+    ports:
+      - '9098:9098'
+    networks:
+      - alpha
+    healthcheck:
+      test: curl --fail http://localhost:9098 || exit 0
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      libdb:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+
+  libclient:
+    image: libraryclient:v01
+    container_name: library-client
+    build:
+      context: .
+      dockerfile: DockerfileTownLibraryClient
+    restart: unless-stopped
+    environment:
+      - LIB_CLIENT_PORT=9099
+      - LIB_SERVER_HOST=library-server
+      - LIB_SERVER_PORT=9098
+    ports:
+      - '9099:9099'
+    networks:
+      - alpha
+    depends_on:
+      libserver:
+        condition: service_healthy
+
+  libdb:
+    image: postgres:13.8-alpine
+    container_name: library-database
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=libdb
+      - POSTGRES_USER=adminuser
+      - POSTGRES_PASSWORD=adminpswd
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - libdb:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - alpha
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-d", "libdb" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: library-kafka-server
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+    volumes:
+      - kafka_data:/bitnami
+    networks:
+      - alpha
+
+volumes:
+  libdb:
+  kafka_data:
+    driver: local
+
+networks:
+  alpha:
+    driver: bridge
+    name: alpha
